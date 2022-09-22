@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_test1/FETCH_wdgts.dart';
 import 'package:flutter_app_test1/routesGenerator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_app_test1/configuration.dart';
 
 class Category {
   String name;
@@ -51,11 +52,6 @@ class MapsPage extends StatefulWidget {
 class _MapsPageState extends State<MapsPage> {
   TextEditingController _searchController = TextEditingController();
 
-  List<Category> categories = [
-    Category(name: 'Vets'),
-    Category(name: 'Pet Stores'),
-    Category(name: 'Parks'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +60,70 @@ class _MapsPageState extends State<MapsPage> {
         body: Column(
           children:
           [
-            TextFormField (
-              controller: _searchController,
-              onChanged: (value){
-                print(value);
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Search',
-              ),),
-             Expanded(
+            SizedBox(height: 20),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.grey[400],
+                  ),
+                  hintText: 'Search',
+                  hintStyle:
+                  TextStyle(letterSpacing: 1, color: Colors.grey[400]),
+                  filled: true,
+                  fillColor: Colors.white,
+                  suffixIcon: Icon(Icons.tune_sharp, color: Colors.grey[400]),
+                ),
+              ),
+
+            ),
+            Container(
+              height: 55,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: explorecategories.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.only(left: 10, right:10),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 40.0, right: 40.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Image(
+                              image: AssetImage(explorecategories[index]['imagePath']),
+                              height: 20,
+                              width: 50,
+
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            explorecategories[index]['name'],
+                            style: TextStyle(
+                              color: Colors.grey[700],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+            Expanded(
               child: GoogleMap(
                 initialCameraPosition: CameraPosition(
                   target:LatLng(31.233334,30.033333),zoom: 5.4746,
