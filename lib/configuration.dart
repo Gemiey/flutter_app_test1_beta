@@ -30,7 +30,11 @@ List<Map> categories = [
   {"name": 'Parrots',"imagePath":'assets/images/parrot.png'},
   {"name": 'Rabbits',"imagePath":'assets/images/rabbit.png'},
 ];
-
+List<Map> explorecategories = [
+  {"name": 'Vets',"imagePath":'assets/images/Health.png'},
+  {"name": 'Pet Stores',"imagePath": 'assets/images/Bone.png'},
+  {"name": 'Parks',"imagePath":'assets/images/dog.png'},
+];
 List<Map> catMapList = [
   {"id":0,"name":'Dogs: Our best\nfriends in\nsickness and\nin health',"imagePath":'assets/images/Article 1.png',
     "date":'26 August 2018',},
